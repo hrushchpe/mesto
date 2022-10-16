@@ -7,6 +7,7 @@
     height: 50px;
     border-radius: 2px;
     border: none;
+    cursor: pointer;
 
 }
 .popup__save-button:hover {
