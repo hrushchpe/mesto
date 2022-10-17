@@ -5,6 +5,7 @@
     margin: 0;
     white-space: nowrap;
     align-self: center;
+    text-overflow: ellipsis;
 }
 @media screen and (max-width: 500px) {
     .profile__name {
