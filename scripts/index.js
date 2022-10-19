@@ -10,17 +10,17 @@ let saveButton = document.querySelector('.popup__save-button');
 
 function popUpOpen() {
     popUp.classList.add('popup_opened');
+    inputUpdateToggle ();
 }
 function popUpClose() {
     popUp.classList.remove('popup_opened');
 }
-function inputToggle () {
+function inputUpdateToggle () {
     nameInput.value = profileName.textContent;
     jobInput.value = profileDescription.textContent;
 }
 openPopupButton.addEventListener('click', () => {
     popUpOpen();
-    inputToggle ();
 })
 closePopupButton.addEventListener('click', () => {
     popUpClose();
