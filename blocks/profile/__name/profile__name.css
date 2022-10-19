@@ -8,7 +8,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
     width: 294px;
-    align-self: flex-end;
 }
 @media screen and (max-width: 500px) {
     .profile__name {
