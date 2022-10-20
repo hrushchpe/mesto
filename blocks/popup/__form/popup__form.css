@@ -4,7 +4,7 @@
     margin: 0px 36px;
     width: 358px;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
     .popup__form {
         width: 238px;
         margin: 0 22px;
