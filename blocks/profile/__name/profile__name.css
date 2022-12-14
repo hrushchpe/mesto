@@ -4,7 +4,7 @@
     line-height: 48px;
     margin: 0;
     white-space: nowrap;
-    align-self: center;
+    text-align: center;
     text-overflow: ellipsis;
     overflow: hidden;
     width: 294px;

@@ -77,7 +77,7 @@ function handleSubmitProfileForm (evt) {
 popupFormProfile.addEventListener('submit', handleSubmitProfileForm);
 
 
-function addCard(cardData) {
+function createCard(cardData) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const cardTitle = cardElement.querySelector(".element__title");
   const cardImage = cardElement.querySelector(".element__photo");
@@ -107,19 +107,26 @@ function addCard(cardData) {
 
 function handleSubmitAddCardForm(evt) {
   evt.preventDefault();
-  const cardTemplate = addCard({
+  const cardTemplate = createCard({
     name: popupPlaceInput.value,
     link: popupLinkInput.value,
   });
   cardContainer.prepend(cardTemplate);
   closePopup(popUpCard);
   popupFormCard.reset();
+  disableSaveButton(evt.target);
+};
+
+function disableSaveButton (popup) {
+  const button = popup.querySelector('.popup__save-button');
+  button.classList.add('popup__save-button-inactive');
+  button.setAttribute('disabled', true);
 };
 
 popupFormCard.addEventListener("submit", handleSubmitAddCardForm);
 
 initialCards.forEach((cardData) => {
-  const cardTemplate = addCard(cardData);
+  const cardTemplate = createCard(cardData);
   cardContainer.append(cardTemplate);
 });
 

@@ -35,7 +35,7 @@
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form popup__form_profile" name="popupForm" novalidate>
+            <form class="popup__form popup__form_profile" name="formProfile" novalidate>
                 <input id='name-input' type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required minlength=2 maxlength=40>
                 <span class='popup__input-error name-input-error' ></span>
                 <input id='description-input' type="text" name="description" class="popup__input popup__input_type_description" placeholder="О себе" required minlength=2 maxlength=200>
@@ -48,7 +48,7 @@
         <div class="popup__container">
             <button class="popup__close-button popup__close-button-card" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form popup__form_card" name="popupForm" novalidate>
+            <form class="popup__form popup__form_card" name="formCard" novalidate>
                 <input id='place-input' type="text" name="card-title" class="popup__input popup__input_type_place" placeholder="Название" required minlength=2 maxlength=30>
                 <span class='popup__input-error place-input-error' type="text"></span>
                 <input id='link-input' type="url" name="card-link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required>
