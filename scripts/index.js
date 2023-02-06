@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import {initialCards, validationConfig} from './constants.js';
 
 const popupFormProfile = document.querySelector('.popup__form_profile');
 const nameInput = document.querySelector(".popup__input_type_name");
@@ -25,46 +26,8 @@ const popupPlaceInput = document.querySelector(".popup__input_type_place");
 const popupLinkInput = document.querySelector(".popup__input_type_link");
 const cardTemplate = document.querySelector('#element__template').content;
 
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
-
-const enableValidation = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button-inactive',
-  inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__input_error_active',
-};
-
-const profileEditValidation = new FormValidator(enableValidation, formEditProfile);
-const cardAddValidation = new FormValidator(enableValidation, formAddCard);
+const profileEditValidation = new FormValidator(validationConfig, formEditProfile);
+const cardAddValidation = new FormValidator(validationConfig, formAddCard);
 profileEditValidation.enableValidation();
 cardAddValidation.enableValidation();
 
@@ -92,14 +55,14 @@ popUpProfile.addEventListener('click', handlerClickOverlay);
 popUpCard.addEventListener('click', handlerClickOverlay);
 popupImg.addEventListener('click', handlerClickOverlay);
 
-function updateInputToggle () {
+function updatePopupInputs () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
 };
 
 popupOpenProfileButton.addEventListener('click', () => {
   openPopup(popUpProfile);
-  updateInputToggle();
+  updatePopupInputs();
 });
 popupOpenButtonCard.addEventListener('click', () => {
   openPopup(popUpCard);
@@ -126,14 +89,13 @@ popupFormProfile.addEventListener('submit', handleSubmitProfileForm);
 
 function createCard(data) {
   const newCard = new Card(data, '#element__template', handleCardClick)
-  const cardElement = newCard.generateCard()
-  return cardElement;
+  return newCard.generateCard();
 };
 
-function handleCardClick(cardData) {
-  popupPhoto.src = cardData.link;
-  popupPhoto.alt = cardData.name;
-  popupImgTitle.textContent = cardData.name;
+function handleCardClick() {
+  popupPhoto.src = this._link;
+  popupPhoto.alt = this._name;
+  popupImgTitle.textContent = this._name;
   openPopup(popupImg);
 };
 
@@ -146,14 +108,10 @@ function handleSubmitAddCardForm(evt) {
   cardContainer.prepend(cardTemplate);
   closePopup(popUpCard);
   popupFormCard.reset();
-  disableSaveButton(evt.target);
+  cardAddValidation.disableSubmitButton();
 };
 
-function disableSaveButton (popup) {
-  const button = popup.querySelector('.popup__save-button');
-  button.classList.add('popup__save-button-inactive');
-  button.setAttribute('disabled', true);
-};
+
 
 popupFormCard.addEventListener("submit", handleSubmitAddCardForm);
 
